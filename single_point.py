@@ -1,11 +1,13 @@
+from array import array
+
+from sklearn.preprocessing import OneHotEncoder, LabelEncoder
 
 
 work_class_values = ['Private', 'Self-emp-not-inc', 'Self-emp-inc', 'Federal-gov',
                      'Local-gov', 'State-gov', 'Without-pay', 'Never-worked']
-work_class_values_encode = [[1, 0, 0, 0, 0, 0, 0, 0], [0, 1, 0, 0, 0, 0, 0, 0],
-                            [0, 0, 1, 0, 0, 0, 0, 0], [0, 0, 0, 1, 0, 0, 0, 0],
-                            [0, 0, 0, 0, 0, 0, 0, 1], [0, 0, 0, 0, 1, 0, 0, 0],
-                            [0, 0, 0, 0, 0, 1, 0, 0], [0, 0, 0, 0, 0, 0, 1, 0]]
+work_class_to_encode = array(work_class_values)
+label_encoder = LabelEncoder()
+work_class_encoder = label_encoder.fit_transform(work_class_to_encode)
 
 education_values = ['Bachelors', 'Some-college', '11th', 'HS-grad', 'Prof-school',
                     'Assoc-acdm', 'Assoc-voc', '9th','7th-8th', '12th', 'Masters',

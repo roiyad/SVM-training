@@ -16,7 +16,7 @@ class SVMHandler:
     normalizer = min_max_normalization.ZScoreNormalizationStrategy()
 
     def __init__(self):
-        self.svc = svm.SVC()
+        self.svc = svm.SVC(kernel='linear')
         train_data_x, train_data_y = parse_data("C:\\Users\\roiya\\Downloads\\rnd_velis_ml_test (1)\\data\\adult.data")
         test_data_x, test_data_y = parse_data("C:\\Users\\roiya\\Downloads\\rnd_velis_ml_test (1)\\data\\adult.test")
         train_data_x = self.normalizer.one_hot_encode(train_data_x)
