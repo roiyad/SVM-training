@@ -69,7 +69,7 @@ def run_gui():
     send_button = Button(mainframe, text="Send results", \
                          command=lambda: create_thread(send_mail, "sending mail"))
     send_button.grid(row=0, column=2, padx=5, pady=5)
-    tem_button = Button(mainframe, text="practice", command= lambda)
+    # tem_button = Button(mainframe, text="practice", command= lambda)
 
 
     for child in mainframe.winfo_children():

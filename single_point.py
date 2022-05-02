@@ -36,8 +36,6 @@ def parse(split_line_array):
     # Age
     x.append(int(split_line_array[0]))
     # Work-class
-    if split_line_array[1] == '0':
-        print("hello")
     x.append(work_class_values.index(split_line_array[1]))
     # fnlwgt
     x.append(int(split_line_array[2]))
@@ -64,7 +62,7 @@ def parse(split_line_array):
     # Native-country
     x.append(native_country_values.index(split_line_array[13]))
     # bias
-    # x.append(1)
+    x.append(1)
 
     y_value = str(split_line_array[14])
     if y_value.__contains__('<=50K'):
