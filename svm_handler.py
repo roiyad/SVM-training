@@ -1,5 +1,4 @@
 from sklearn import svm
-
 import min_max_normalization
 from parse_data import parse_data
 from tkinter import *
@@ -20,11 +19,10 @@ class SVMHandler:
         self.svc = svm.SVC()
         train_data_x, train_data_y = parse_data("C:\\Users\\roiya\\Downloads\\rnd_velis_ml_test (1)\\data\\adult.data")
         test_data_x, test_data_y = parse_data("C:\\Users\\roiya\\Downloads\\rnd_velis_ml_test (1)\\data\\adult.test")
-        norm_train_data_x, norm_test_data_x = self.normalizer.normalize(train_data_x, test_data_x)
-
-        self.train_model_data = [norm_train_data_x, train_data_y]
-        self.test_model_data = [norm_test_data_x, test_data_y]
-
+        train_data_x = self.normalizer.one_hot_encode(train_data_x)
+        test_data_x = self.normalizer.one_hot_encode(test_data_x)
+        self.train_model_data = [train_data_x, train_data_y]
+        self.test_model_data = [test_data_x, test_data_y]
 
     def train(self):
         svc_mod = self.svc.fit(self.train_model_data[0], self.train_model_data[1])
@@ -33,13 +31,9 @@ class SVMHandler:
         print("finish training")
 
     def test(self):
-
         y_pred = self.svc.predict(self.test_model_data[0])
         self.error_pct = calculate_error_percentage(self.test_model_data[1], y_pred)
         print("finish testing")
 
     def get_result(self):
         return self.error_pct
-
-
-
