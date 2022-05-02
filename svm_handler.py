@@ -18,7 +18,7 @@ class SVMHandler:
     normalizer = min_max_normalization.MinMaxNormalizationStrategy(0, 1)
 
     def __init__(self):
-        self.svc = svm.SVC()
+        self.svc = svm.SVC(kernel="poly", degree=5)
         train_data_x, train_data_y = parse_data("C:\\Users\\roiya\\Downloads\\rnd_velis_ml_test (1)\\data\\adult.data")
         test_data_x, test_data_y = parse_data("C:\\Users\\roiya\\Downloads\\rnd_velis_ml_test (1)\\data\\adult.test")
 
