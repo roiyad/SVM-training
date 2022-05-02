@@ -68,7 +68,7 @@ class ZScoreNormalizationStrategy:
                 if i == 0:
                     row[i] = self.one_hot_encode_age(row[i])
                 elif i == 2:
-                    row[i] = self.one_hot_encode_5(row[i], [110000, 160000, 196000, 260000])
+                    row[i] = self.one_hot_encode_5(row[i], [110000, 159999, 196335, 259865])
                 elif i == 10:
                     row[i] = self.one_hot_encode_5(row[i], [600, 1500, 4000, 7000])
                 elif i == 11:
