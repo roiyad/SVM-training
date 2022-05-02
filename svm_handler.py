@@ -5,7 +5,6 @@ from parse_data import parse_data
 from tkinter import *
 from tkinter import messagebox
 from calc_error_pct import calculate_error_percentage
-from min_max_normalization import *
 
 
 class SVMHandler:
@@ -15,7 +14,7 @@ class SVMHandler:
     svc = 0  # just to initialize
     error_pct = 0
     coefficients = []
-    normalizer = min_max_normalization.MinMaxNormalizationStrategy(0, 1)
+    normalizer = min_max_normalization.ZScoreNormalizationStrategy()
 
     def __init__(self):
         self.svc = svm.SVC()
