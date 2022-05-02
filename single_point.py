@@ -2,26 +2,21 @@ from array import array
 
 from sklearn.preprocessing import OneHotEncoder, LabelEncoder
 
-def one_hot_encode(index ,values):
-    label_encoder = LabelEncoder()
-    integer_encoded = label_encoder.fit_transform(values)
-    integer_encoded = integer_encoded .reshape(len(integer_encoded), 1)
-    one_hot_encoder = OneHotEncoder(sparse=False)
-    one_hot_encoded = one_hot_encoder.fit_transform(integer_encoded)
-    return one_hot_encoded[index]
+
+
+
+
 
 
 work_class_values = ['Private', 'Self-emp-not-inc', 'Self-emp-inc', 'Federal-gov',
                      'Local-gov', 'State-gov', 'Without-pay', 'Never-worked']
 
 education_values = ['Bachelors', 'Some-college', '11th', 'HS-grad', 'Prof-school',
-                    'Assoc-acdm', 'Assoc-voc', '9th','7th-8th', '12th', 'Masters',
-                    '1st-4th', '10th', 'Doctorate', '5th-6th', 'Preschool' ]
-
+                    'Assoc-acdm', 'Assoc-voc', '9th', '7th-8th', '12th', 'Masters',
+                    '1st-4th', '10th', 'Doctorate', '5th-6th', 'Preschool']
 
 marital_status_values = ['Married-civ-spouse', 'Divorced', 'Never-married', 'Separated',
                          'Widowed', 'Married-spouse-absent', 'Married-AF-spouse']
-
 
 occupation_values = ['Tech-support', 'Craft-repair', 'Other-service', 'Sales',
                      'Exec-managerial', 'Prof-specialty', 'Handlers-cleaners',
@@ -44,6 +39,10 @@ native_country_values = ['United-States', 'Cambodia', 'England', 'Puerto-Rico',
                          'Nicaragua', 'Scotland', 'Thailand', 'Yugoslavia',
                          'El-Salvador', 'Trinadad&Tobago', 'Peru', 'Hong', 'Holand-Netherlands']
 
+values = [None, work_class_values, None, education_values, None,
+          marital_status_values, occupation_values, relationship_values,
+          race_values, sex_values, None, None, None, native_country_values]
+
 def parse(split_line_array):
     """ each line will be converted to the correct numeric value and will be inserted to a 1xM vector (x vector)
     """
@@ -51,17 +50,17 @@ def parse(split_line_array):
     # Age
     x.append(int(split_line_array[0]))
     # Work-class
-    x.append(one_hot_encode(work_class_values.index(split_line_array[1]), work_class_values))
+    x.append(work_class_values.index(split_line_array[1]))
     # fnlwgt
     x.append(int(split_line_array[2]))
     # Education
-    x.append(one_hot_encode(education_values.index(split_line_array[3]), education_values))
+    x.append(education_values.index(split_line_array[3]))
     # Education-num
     x.append(int(split_line_array[4]))
     # Martial-status
-    x.append(one_hot_encode(marital_status_values.index(split_line_array[5]), marital_status_values))
+    x.append(marital_status_values.index(split_line_array[5]))
     # Occupation
-    x.append(one_hot_encode(occupation_values.index(split_line_array[6]), occupation_values))
+    x.append(occupation_values.index(split_line_array[6]))
     # Relationship
     x.append(relationship_values.index(split_line_array[7]))
     # Race
@@ -86,6 +85,3 @@ def parse(split_line_array):
         y_value = 1
 
     return x, y_value
-
-
-

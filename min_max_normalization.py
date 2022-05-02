@@ -1,12 +1,23 @@
 import numpy as np
-from sklearn.preprocessing import OneHotEncoder
-
+from sklearn.preprocessing import OneHotEncoder, LabelEncoder
+from single_point import values
 
 
 class ZScoreNormalizationStrategy:
+    one_hot_encoders = []
 
     def __init__(self):
-        pass
+        for i in range(len(values)):
+            if values[i] is not None:
+                label_encoder = LabelEncoder()
+                integer_encoded = label_encoder.fit_transform(values[i])
+                integer_encoded = integer_encoded.reshape(len(integer_encoded), 1)
+                one_hot_encoder = OneHotEncoder(sparse=False)
+                one_hot_encoded = one_hot_encoder.fit_transform(integer_encoded)
+                self.one_hot_encoders.append(one_hot_encoded)
+            else:
+                self.one_hot_encoders.append([])
+
 
     """
     Normalize features.
@@ -69,12 +80,16 @@ class ZScoreNormalizationStrategy:
                     row[i] = self.one_hot_encode_age(row[i])
                 elif i == 2:
                     row[i] = self.one_hot_encode_5(row[i], [110000, 160000, 196000, 260000])
+                elif i == 4:
+                    continue
                 elif i == 10:
                     row[i] = self.one_hot_encode_5(row[i], [600, 1500, 4000, 7000])
                 elif i == 11:
                     row[i] = self.one_hot_encode_5(row[i], [500, 1000, 2000, 3100])
                 elif i == 12:
                     row[i] = self.one_hot_encode_5(row[i], [6, 40, 60, 80])
+                else:
+                    row[i] = self.categorical_hot_encode(i, row[i])
             flat_row = []
             for sublist in row:
                 if type(sublist) != int:
@@ -90,6 +105,8 @@ class ZScoreNormalizationStrategy:
             modified_data.append(self.one_hot_normilize_for_row(row))
         return modified_data
 
+    def categorical_hot_encode(self, index, value):
+        return self.one_hot_encoders[index][value]
 
 
 
