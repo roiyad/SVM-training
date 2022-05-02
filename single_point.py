@@ -1,12 +1,23 @@
+
+
 work_class_values = ['Private', 'Self-emp-not-inc', 'Self-emp-inc', 'Federal-gov',
                      'Local-gov', 'State-gov', 'Without-pay', 'Never-worked']
+work_class_values_encode = [[1, 0, 0, 0, 0, 0, 0, 0], [0, 1, 0, 0, 0, 0, 0, 0],
+                            [0, 0, 1, 0, 0, 0, 0, 0], [0, 0, 0, 1, 0, 0, 0, 0],
+                            [0, 0, 0, 0, 0, 0, 0, 1], [0, 0, 0, 0, 1, 0, 0, 0],
+                            [0, 0, 0, 0, 0, 1, 0, 0], [0, 0, 0, 0, 0, 0, 1, 0]]
 
 education_values = ['Bachelors', 'Some-college', '11th', 'HS-grad', 'Prof-school',
                     'Assoc-acdm', 'Assoc-voc', '9th','7th-8th', '12th', 'Masters',
                     '1st-4th', '10th', 'Doctorate', '5th-6th', 'Preschool' ]
 
+
 marital_status_values = ['Married-civ-spouse', 'Divorced', 'Never-married', 'Separated',
                          'Widowed', 'Married-spouse-absent', 'Married-AF-spouse']
+martial_status_encode_values = [[1, 0, 0, 0, 0, 0, 0], [0, 1, 0, 0, 0, 0, 0],
+                                [0, 0, 1, 0, 0, 0, 0], [0, 0, 0, 1, 0, 0, 0],
+                                [0, 0, 0, 0, 1, 0, 0], [0, 0, 0, 0, 0, 1, 0],
+                                [0, 0, 0, 0, 0, 0, 1]]
 
 occupation_values = ['Tech-support', 'Craft-repair', 'Other-service', 'Sales',
                      'Exec-managerial', 'Prof-specialty', 'Handlers-cleaners',
@@ -36,7 +47,7 @@ def parse(split_line_array):
     # Age
     x.append(int(split_line_array[0]))
     # Work-class
-    x.append(work_class_values.index(split_line_array[1]))
+    x.append(work_class_values_encode[work_class_values.index(split_line_array[1])])
     # fnlwgt
     x.append(int(split_line_array[2]))
     # Education
@@ -44,7 +55,7 @@ def parse(split_line_array):
     # Education-num
     x.append(int(split_line_array[4]))
     # Martial-status
-    x.append(marital_status_values.index(split_line_array[5]))
+    x.append(martial_status_encode_values[marital_status_values.index(split_line_array[5])])
     # Occupation
     x.append(occupation_values.index(split_line_array[6]))
     # Relationship

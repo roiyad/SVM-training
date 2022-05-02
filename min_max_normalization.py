@@ -17,7 +17,6 @@ class ZScoreNormalizationStrategy:
         all_x = np.concatenate((train_x, test_x))
         mean_ = np.mean(all_x, axis=0)
         std_ = np.std(all_x, axis=0)
-
         normalized_train_x = np.apply_along_axis(self._normalize_vector, 1, train_x, mean_, std_)
         normalized_test_x = np.apply_along_axis(self._normalize_vector, 1, test_x, mean_, std_)
 
@@ -63,12 +62,13 @@ class ZScoreNormalizationStrategy:
             else :
                 return [0, 0, 0, 0, 1]
 
-    def one_hot_normilize_for_row(self, row):
+
+    def one_hot_normilize_for_row(self,row):
             for i in range(14):
                 if i == 0:
                     row[i] = self.one_hot_encode_age(row[i])
                 elif i == 2:
-                    row[i] = self.one_hot_encode_5(row[i], [110000, 159999, 196335, 259865])
+                    row[i] = self.one_hot_encode_5(row[i], [110000, 160000, 196000, 260000])
                 elif i == 10:
                     row[i] = self.one_hot_encode_5(row[i], [600, 1500, 4000, 7000])
                 elif i == 11:
@@ -88,8 +88,6 @@ class ZScoreNormalizationStrategy:
         modified_data = []
         for row in data:
             modified_data.append(self.one_hot_normilize_for_row(row))
-
-
         return modified_data
 
 
