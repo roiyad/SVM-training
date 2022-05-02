@@ -48,7 +48,7 @@ def parse_rest_of_the_data(median_value, lines):
     final_y_vector = list()
     for line in lines:
         split_line_array = [x.strip() for x in line.split(",")]
-        if split_line_array[14] == "?":
+        if split_line_array[14] == "?" or split_line_array[13] == "?":
             continue
         col = 0
         for value in split_line_array:
