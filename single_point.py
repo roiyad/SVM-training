@@ -2,12 +2,17 @@ from array import array
 
 from sklearn.preprocessing import OneHotEncoder, LabelEncoder
 
+def one_hot_encode(index ,values):
+    label_encoder = LabelEncoder()
+    integer_encoded = label_encoder.fit_transform(values)
+    integer_encoded = integer_encoded .reshape(len(integer_encoded), 1)
+    one_hot_encoder = OneHotEncoder(sparse=False)
+    one_hot_encoded = one_hot_encoder.fit_transform(integer_encoded)
+    return one_hot_encoded[index]
+
 
 work_class_values = ['Private', 'Self-emp-not-inc', 'Self-emp-inc', 'Federal-gov',
                      'Local-gov', 'State-gov', 'Without-pay', 'Never-worked']
-work_class_to_encode = array(work_class_values)
-label_encoder = LabelEncoder()
-work_class_encoder = label_encoder.fit_transform(work_class_to_encode)
 
 education_values = ['Bachelors', 'Some-college', '11th', 'HS-grad', 'Prof-school',
                     'Assoc-acdm', 'Assoc-voc', '9th','7th-8th', '12th', 'Masters',
@@ -16,10 +21,7 @@ education_values = ['Bachelors', 'Some-college', '11th', 'HS-grad', 'Prof-school
 
 marital_status_values = ['Married-civ-spouse', 'Divorced', 'Never-married', 'Separated',
                          'Widowed', 'Married-spouse-absent', 'Married-AF-spouse']
-martial_status_encode_values = [[1, 0, 0, 0, 0, 0, 0], [0, 1, 0, 0, 0, 0, 0],
-                                [0, 0, 1, 0, 0, 0, 0], [0, 0, 0, 1, 0, 0, 0],
-                                [0, 0, 0, 0, 1, 0, 0], [0, 0, 0, 0, 0, 1, 0],
-                                [0, 0, 0, 0, 0, 0, 1]]
+
 
 occupation_values = ['Tech-support', 'Craft-repair', 'Other-service', 'Sales',
                      'Exec-managerial', 'Prof-specialty', 'Handlers-cleaners',
@@ -49,17 +51,17 @@ def parse(split_line_array):
     # Age
     x.append(int(split_line_array[0]))
     # Work-class
-    x.append(work_class_values_encode[work_class_values.index(split_line_array[1])])
+    x.append(one_hot_encode(work_class_values.index(split_line_array[1]), work_class_values))
     # fnlwgt
     x.append(int(split_line_array[2]))
     # Education
-    x.append(education_values.index(split_line_array[3]))
+    x.append(one_hot_encode(education_values.index(split_line_array[3]), education_values))
     # Education-num
     x.append(int(split_line_array[4]))
     # Martial-status
-    x.append(martial_status_encode_values[marital_status_values.index(split_line_array[5])])
+    x.append(one_hot_encode(marital_status_values.index(split_line_array[5]), marital_status_values))
     # Occupation
-    x.append(occupation_values.index(split_line_array[6]))
+    x.append(one_hot_encode(occupation_values.index(split_line_array[6]), occupation_values))
     # Relationship
     x.append(relationship_values.index(split_line_array[7]))
     # Race
