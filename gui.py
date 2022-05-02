@@ -33,9 +33,9 @@ def run_gui():
             update_label("the model has already trained the data", 5, 1)
             return
         print(threading.current_thread().name + " is running")
-        actions_signals[0] = True
         svm_handler.train()
         update_label("The train has finished", 3, 0)
+        actions_signals[0] = True
         return
 
     # Here you need to start the testing with the svm. Remember, the other actions (training/sending mail) must be
@@ -46,9 +46,9 @@ def run_gui():
             update_label("The system has not been trained yet", 3, 1)
             return
         else:
-            actions_signals[1] = True
             svm_handler.test()
             update_label("The test has finished", 3, 2)
+            actions_signals[1] = True
             return
 
     # Here you need to send an email with the svm testing result. Remember, the other actions (training/testing)
