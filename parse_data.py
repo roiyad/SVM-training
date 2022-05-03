@@ -31,13 +31,13 @@ def parse_data(data_file_full_path):
                 vals[section][value] = 0
             vals[section][value] += 1
             if vals[section][value] > median_counter[section]:
+                # noinspection PyTypeChecker
                 median_value[section] = value
                 median_counter[section] = vals[section][value]
             section += 1
         final_x_matrix.append(res[0])
         final_y_vector.append(res[1])
     result_of_modify_data = parse_rest_of_the_data(median_value, lines_for_later)
-    plot_graphs(vals)
     for i in range(len(result_of_modify_data[0])):
         final_x_matrix.append(result_of_modify_data[0][i])
         final_y_vector.append(result_of_modify_data[1][i])
@@ -51,17 +51,10 @@ def parse_rest_of_the_data(median_value, lines):
         split_line_array = [x.strip() for x in line.split(",")]
         if split_line_array[14] == "?" or split_line_array[13] == "?":
             continue
-        col = 0
-        for value in split_line_array:
+        for col in range(len(split_line_array)):
             if split_line_array[col] == '?':
                 split_line_array[col] = median_value[col]
-            col += 1
         res = parse(split_line_array)
         final_x_matrix.append(res[0])
         final_y_vector.append(res[1])
     return final_x_matrix, final_y_vector
-
-def plot_graphs(vals):
-    return
-
-# parse_data("C:\\Users\\roiya\\Downloads\\rnd_velis_ml_test (1)\\data\\adult.data")

@@ -1,6 +1,3 @@
-from array import array
-
-from sklearn.preprocessing import OneHotEncoder, LabelEncoder
 
 work_class_values = ['Private', 'Self-emp-not-inc', 'Self-emp-inc', 'Federal-gov',
                      'Local-gov', 'State-gov', 'Without-pay', 'Never-worked']
@@ -33,6 +30,8 @@ native_country_values = ['United-States', 'Cambodia', 'England', 'Puerto-Rico',
                          'Nicaragua', 'Scotland', 'Thailand', 'Yugoslavia',
                          'El-Salvador', 'Trinadad&Tobago', 'Peru', 'Hong', 'Holand-Netherlands']
 
+
+# Dictionary for the OneHot Encoder for categorical values
 values = [None, work_class_values, education_values, None,
           marital_status_values, occupation_values, relationship_values,
           sex_values, None, None, None, native_country_values]
