@@ -37,7 +37,7 @@ def run_gui():
             return
         train_button.config(state=DISABLED)
         print(threading.current_thread().name + " is running")
-        label = Label(mainframe, text="training")
+        label = Label(mainframe, text="Training...")
         label.grid(row=2, column=2, pady=50)
         svm_handler.train()
         label.destroy()
@@ -56,10 +56,10 @@ def run_gui():
             test_button.config(state=ACTIVE)
             return
         else:
+            label = Label(mainframe, text="Testing...")
             svm_handler.test()
             update_label("The test has finished", 3, 2)
             actions_signals[1] = True
-            label = Label(mainframe, text="training")
             label.grid(row=2, column=2, pady=50)
             test_button.config(state=ACTIVE)
             send_button.config(state=ACTIVE)
