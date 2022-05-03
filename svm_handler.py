@@ -16,7 +16,7 @@ class SVMHandler:
     coefficients = []
 
     def __init__(self):
-        self.svc = svm.LinearSVC(C=C_VALUE, penalty='l2', loss='squared_hinge')
+        self.svc = svm.LinearSVC(C=C_VALUE, loss='squared_hinge', max_iter=100000)
         onehot = onehotencode.OneHotEncode()
         self.train_data, self.test_data = self.read_data(onehot)
 
