@@ -2,12 +2,6 @@ from array import array
 
 from sklearn.preprocessing import OneHotEncoder, LabelEncoder
 
-
-
-
-
-
-
 work_class_values = ['Private', 'Self-emp-not-inc', 'Self-emp-inc', 'Federal-gov',
                      'Local-gov', 'State-gov', 'Without-pay', 'Never-worked']
 
@@ -39,9 +33,9 @@ native_country_values = ['United-States', 'Cambodia', 'England', 'Puerto-Rico',
                          'Nicaragua', 'Scotland', 'Thailand', 'Yugoslavia',
                          'El-Salvador', 'Trinadad&Tobago', 'Peru', 'Hong', 'Holand-Netherlands']
 
-values = [None, work_class_values, None, education_values, None,
+values = [None, work_class_values, education_values, None,
           marital_status_values, occupation_values, relationship_values,
-          race_values, sex_values, None, None, None, native_country_values]
+          sex_values, None, None, None, native_country_values]
 
 def parse(split_line_array):
     """ each line will be converted to the correct numeric value and will be inserted to a 1xM vector (x vector)
@@ -52,7 +46,7 @@ def parse(split_line_array):
     # Work-class
     x.append(work_class_values.index(split_line_array[1]))
     # fnlwgt
-    x.append(int(split_line_array[2]))
+    # x.append(int(split_line_array[2]))
     # Education
     x.append(education_values.index(split_line_array[3]))
     # Education-num
@@ -64,7 +58,7 @@ def parse(split_line_array):
     # Relationship
     x.append(relationship_values.index(split_line_array[7]))
     # Race
-    x.append(race_values.index(split_line_array[8]))
+    # x.append(race_values.index(split_line_array[8]))
     # Sex
     x.append(sex_values.index(split_line_array[9]))
     # Capital-gain
