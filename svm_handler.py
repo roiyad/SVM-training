@@ -2,10 +2,9 @@ from sklearn import svm
 import onehotencode
 from parse_data import parse_data
 from calc_error_pct import calculate_error_percentage
-
+import os
 # model parameters
-C_VALUE = 1
-KERNEL_FUNCTION = 'linear'
+C_VALUE = 0.01
 
 
 class SVMHandler:
@@ -17,12 +16,14 @@ class SVMHandler:
     coefficients = []
 
     def __init__(self):
-        self.svc = svm.SVC(kernel=KERNEL_FUNCTION, C=C_VALUE)
+        self.svc = svm.LinearSVC(C=C_VALUE, penalty='l2', loss='squared_hinge')
         onehot = onehotencode.OneHotEncode()
         self.train_data, self.test_data = self.read_data(onehot)
 
     @staticmethod
     def read_data(onehot):
+        file = os.path.dirname(__file__)
+
         train_data_x, train_data_y = parse_data("C:\\Users\\roiya\\Downloads\\rnd_velis_ml_test (1)\\data\\adult.data")
         test_data_x, test_data_y = parse_data("C:\\Users\\roiya\\Downloads\\rnd_velis_ml_test (1)\\data\\adult.test")
         train_data_x = onehot.one_hot_encode(train_data_x)
@@ -31,7 +32,7 @@ class SVMHandler:
 
     def train(self):
         svc_mod = self.svc.fit(self.train_data[0], self.train_data[1])
-        self.coefficients = svc_mod.dual_coef_
+        self.coefficients = svc_mod.coef_
         print("Coefficients: ", self.coefficients)
         print("Finished training")
 

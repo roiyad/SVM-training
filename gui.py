@@ -67,8 +67,8 @@ def run_gui():
         send_button.config(state=DISABLED)
         update_label("Sending mail", 2, 1)
         message = "The error percentage of the model is " + str(svm_handler.error_pct)
-        mail.sendemail(message)
         enable_buttons([train_button, test_button, send_button])
+        # mail.sendemail(message)
         return
 
     def update_label(message, row, column):
