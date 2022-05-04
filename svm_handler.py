@@ -22,10 +22,9 @@ class SVMHandler:
 
     @staticmethod
     def read_data(onehot):
-        file = os.path.dirname(__file__)
 
-        train_data_x, train_data_y = parse_data("C:\\Users\\roiya\\Downloads\\rnd_velis_ml_test (1)\\data\\adult.data")
-        test_data_x, test_data_y = parse_data("C:\\Users\\roiya\\Downloads\\rnd_velis_ml_test (1)\\data\\adult.test")
+        train_data_x, train_data_y = parse_data("data/adult.data")
+        test_data_x, test_data_y = parse_data("data/adult.test")
         train_data_x = onehot.one_hot_encode(train_data_x)
         test_data_x = onehot.one_hot_encode(test_data_x)
         return [train_data_x, train_data_y], [test_data_x, test_data_y]
